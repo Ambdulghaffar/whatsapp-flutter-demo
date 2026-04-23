@@ -9,14 +9,55 @@ class DiscussionsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'WhatsApp',
-          style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 24) 
+          style: TextStyle(
+            color: Colors.green,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
         ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.camera_alt_outlined),
           ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            onSelected: (value) {
+              print("Tu as cliqué sur : $value");
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem(
+                  value: "Nouveau groupe",
+                  child: Text("Nouveau groupe"),
+                ),
+                const PopupMenuItem(
+                  value: "Nouvelle communauté",
+                  child: Text("Nouvelle communauté"),
+                ),
+                const PopupMenuItem(
+                  value: "Nouvelle diffusion",
+                  child: Text("Nouvelle diffusion"),
+                ),
+                const PopupMenuItem(
+                  value: "Appareils connectés",
+                  child: Text("Appareils connectés"),
+                ),
+                const PopupMenuItem(
+                  value: "Important",
+                  child: Text("Important"),
+                ),
+                const PopupMenuItem(
+                  value: "Tout lire",
+                  child: Text("Tout lire"),
+                ),
+                const PopupMenuItem(
+                  value: "Paramètres",
+                  child: Text("Paramètres"),
+                ),
+              ];
+            },
+          ),
         ],
       ),
       body: Column(
@@ -34,12 +75,12 @@ class DiscussionsPage extends StatelessWidget {
                 ),
                 filled: true,
                 fillColor: const Color.fromARGB(103, 217, 215, 215),
-                contentPadding: const EdgeInsets.symmetric(vertical:0)
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
               ),
             ),
           ),
 
-         // 2. Les boutons de filtres (Horizontaux)
+          // 2. Les boutons de filtres (Horizontaux)
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
@@ -58,9 +99,13 @@ class DiscussionsPage extends StatelessWidget {
 
           // 3. La liste des discussions (à venir)
           const Expanded(
-            child:Center(
-              child: Text("Aucune discussion pour le moment", style: TextStyle(color: Colors.grey, fontSize: 16)),
-            ) )
+            child: Center(
+              child: Text(
+                "Aucune discussion pour le moment",
+                style: TextStyle(color: Colors.grey, fontSize: 16),
+              ),
+            ),
+          ),
         ],
       ),
 
@@ -72,7 +117,7 @@ class DiscussionsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterChip(Widget labelContent, bool isSelected){
+  Widget _buildFilterChip(Widget labelContent, bool isSelected) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Chip(
@@ -80,7 +125,7 @@ class DiscussionsPage extends StatelessWidget {
         backgroundColor: isSelected ? const Color(0xFFD8FDD2) : Colors.white,
         labelStyle: TextStyle(
           color: isSelected ? const Color(0xFF008069) : Colors.black,
-          fontWeight: FontWeight.w500
+          fontWeight: FontWeight.w500,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -88,5 +133,4 @@ class DiscussionsPage extends StatelessWidget {
       ),
     );
   }
-
 }
